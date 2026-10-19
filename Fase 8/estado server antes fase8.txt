@@ -1,0 +1,34 @@
+deploy:webadmin 2775 /var/www/sitio
+deploy:webadmin 664 /var/www/sitio/index.html
+www-data:webadmin 2770 /var/www/sitio/uploads
+root:root 700 /var/backups/parcial
+# file: /var/www/sitio
+# owner: deploy
+# group: webadmin
+# flags: -s-
+user::rwx
+group::rwx
+group:webadmin:rwx
+mask::rwx
+other::r-x
+default:user::rwx
+default:group::rwx
+default:group:webadmin:rwx
+default:mask::rwx
+default:other::r-x
+
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    192.168.64.20              # SSH solo cliente1
+80/tcp                     ALLOW IN    192.168.64.0/24            # Nginx
+8080/tcp                   ALLOW IN    192.168.64.0/24            # Apache
+
+permitrootlogin no
+pubkeyauthentication yes
+passwordauthentication no
+allowgroups sshusers

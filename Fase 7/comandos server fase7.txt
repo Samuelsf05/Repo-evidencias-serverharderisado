@@ -1,0 +1,253 @@
+    1  2026-10-18 15:43:32 cat >> ~/.bashrc <<'EOF'
+    2  2026-10-18 15:48:21 source ~/.bashrc
+    3  2026-10-18 15:48:21 mkdir -p ~/evidencias
+    4  2026-10-18 15:48:37 cat >> ~/.bashrc <<'EOF'
+    5  2026-10-18 15:49:18 export HISTTIMEFORMAT='%F %T '
+    6  2026-10-18 15:49:26 source ~/.bashrc
+    7  2026-10-18 15:51:35 cat /etc/os-release
+    8  2026-10-18 15:51:35 uname -r
+    9  2026-10-18 15:51:35 sudo -v
+   10  2026-10-18 15:54:31 su -
+   11  2026-10-18 16:46:38 sudo apt update
+   12  2026-10-18 16:57:37 sudo apt install -y openssh-client curl nmap lynx
+   13  2026-10-18 16:59:22 systemctl list-units --type=service --state=running | tee ~/evidencias/servicios-antes.txt
+   14  2026-10-18 16:59:22 systemctl list-unit-files --type=service --state=enabled
+   15  2026-10-18 17:00:27 sudo ss -tulpn | tee ~/evidencias/puertos-antes.txt
+   16  2026-10-18 17:09:33 for u in cups.service cups.socket cups.path cups-browsed.service avahi-daemon.service avahi-daemon.socket bluetooth.service ModemManager.service; do   sudo systemctl disable --now "$u" 2>/dev/null && echo "deshabilitado: $u" || echo "no existe o ya estaba inactivo: $u"; done
+   17  2026-10-18 17:10:56 sudo ss -tulpn | tee ~/evidencias/puertos-despues.txt
+   18  2026-10-18 17:12:04 systemctl list-unit-files --type=service --state=enabled
+   19  2026-10-18 17:13:05 sudo adduser Admin
+   20  2026-10-18 17:14:25 sudo adduser Charlie
+   21  2026-10-18 17:16:50 sudo adduser Daniel
+   22  2026-10-18 17:18:40 sudo groupadd webadmin
+   23  2026-10-18 17:19:08 sudo groupadd sshusers
+   24  2026-10-18 17:21:54 for u in Admin Charlie Daniel; do sudo usermod -aG webadmin,sshusers "$u"; done
+   25  2026-10-18 17:22:18 sudo adduser --disabled-password --gecos '' deploy
+   26  2026-10-18 17:23:58 sudo usermod -aG webadmin,sshusers deploy
+   27  2026-10-18 17:24:20 id deploy
+   28  2026-10-18 17:24:20 getent passwd deploy
+   29  2026-10-18 17:26:07 sudo usermod -aG sudo Admin
+   30  2026-10-18 17:26:44 sudo usermod -aG sudo Charlie
+   31  2026-10-18 17:26:53 getent group sudo
+   32  2026-10-18 17:27:07 sudo usermod -aG sudo alumno1
+   33  2026-10-18 17:27:07 sudo usermod -aG sudo alumno2
+   34  2026-10-18 17:27:08 getent group sudo
+   35  2026-10-18 17:27:08 id alumno3
+   36  2026-10-18 17:27:08 sudo -l -U www-data
+   37  2026-10-18 17:28:01 sudo gpasswd -d alumno1 sudo
+   38  2026-10-18 17:28:01 sudo gpasswd -d alumno2 sudo
+   39  2026-10-18 17:28:01 getent group sudo
+   40  2026-10-18 17:28:42 sudo usermod -aG sudo Admin
+   41  2026-10-18 17:28:43 sudo usermod -aG sudo Charlie
+   42  2026-10-18 17:28:43 getent group sudo
+   43  2026-10-18 17:28:43 id Daniel
+   44  2026-10-18 17:28:43 sudo -l -U www-data
+   45  2026-10-18 17:28:43 • 
+   46  2026-10-18 17:33:35 history | tail -n 30
+   47  2026-10-18 17:33:35 history | grep apt
+   48  2026-10-18 17:33:35 grep -n 'ufw' ~/.bash_history
+   49  2026-10-18 17:33:35 history > ~/evidencias/historial-adminalgodon.txt
+   50  2026-10-18 17:36:06 sudo mkdir -p /var/www/sitio/uploads
+   51  2026-10-18 17:36:06 sudo chown -R deploy:webadmin /var/www/sitio
+   52  2026-10-18 17:36:06 sudo find /var/www/sitio -type d -exec chmod 2775 {} +
+   53  2026-10-18 17:36:06 sudo find /var/www/sitio -type f -exec chmod 664 {} +
+   54  2026-10-18 17:36:06 sudo chown www-data:webadmin /var/www/sitio/uploads
+   55  2026-10-18 17:36:06 sudo chmod 2770 /var/www/sitio/uploads
+   56  2026-10-18 17:36:06 sudo setfacl -R -m g:webadmin:rwX /var/www/sitio
+   57  2026-10-18 17:36:06 sudo setfacl -R -d -m g:webadmin:rwX /var/www/sitio
+   58  2026-10-18 17:36:06 ls -ld /var/www/sitio /var/www/sitio/uploads
+   59  2026-10-18 17:36:06 getfacl /var/www/sitio
+   60  2026-10-18 17:37:08 sudo find /var/www -perm -o+w
+   61  2026-10-18 17:44:36 sudo -u deploy touch /var/www/sitio/permitido.txt
+   62  2026-10-18 17:44:36 sudo -u www-data touch /var/www/sitio/uploads/permitido-servicio.txt
+   63  2026-10-18 17:44:36 sudo -u www-data touch /var/www/sitio/rechazado.txt
+   64  2026-10-18 17:45:06 sudo -u deploy touch /var/www/sitio/permitido.txt
+   65  2026-10-18 17:45:06 sudo -u www-data touch /var/www/sitio/uploads/permitido-servicio.txt
+   66  2026-10-18 17:45:17 [200~sudo -u www-data touch /var/www/sitio/rechazado.txt
+   67  2026-10-18 17:45:19 sudo -u nobody touch /var/www/sitio/rechazado2.txt~
+   68  2026-10-18 17:45:30 ls -l /var/www/sitio /var/www/sitio/uploads
+   69  2026-10-18 17:45:39 sudo rm /var/www/sitio/permitido.txt /var/www/sitio/uploads/permitido-servicio.txt
+   70  2026-10-18 17:46:30 su - Daniel
+   71  2026-10-18 17:54:57 history | tail -n 150
+   72  2026-10-18 17:54:57 history | grep apt
+   73  2026-10-18 17:54:57 grep -n 'ufw' ~/.bash_history
+   74  2026-10-18 17:54:57 history > ~/evidencias/historial-adminalgodon-fase2.txt
+   75  2026-10-18 18:20:09 sudo systemctl enable --now ss
+   76  2026-10-18 18:20:36 sudo systemctl enable --now ssh
+   77  2026-10-18 18:20:50 systemctl status ssh --no-pager
+   78  2026-10-18 18:21:01 sudo ss -tlnp | grep ':22'
+   79  2026-10-18 18:34:25 getent passwd Admin Charlie Daniel Deploy
+   80  2026-10-18 18:34:41 getent passwd Admin Charlie Daniel deploy
+   81  2026-10-18 18:52:07 sudo passwd Admin
+   82  2026-10-18 18:56:15 sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+   83  2026-10-18 18:56:15 echo 'AAAAC3NzaC1lZDI1NTE5AAAAIABNctlYk8P82mcxF3iRhFhVwjQ7/0RSkLuAxuKQFAU4 deploy@cliente1' | sudo tee /home/deploy/.ssh/authorized_keys
+   84  2026-10-18 18:56:15 sudo chown deploy:deploy /home/deploy/.ssh/authorized_keys
+   85  2026-10-18 18:56:15 sudo chmod 600 /home/deploy/.ssh/authorized_keys
+   86  2026-10-18 18:57:12 id Admin Charlie Daniel deploy
+   87  2026-10-18 18:57:12 getent group webadmin sshusers sudo
+   88  2026-10-18 19:05:44 sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+   89  2026-10-18 19:05:44 echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIABNctlYk8P82mcxF3iRhFhVwjQ7/0RSkLuAxuKQFAU4 deploy@cliente1' | sudo tee /home/deploy/.ssh/authorized_keys
+   90  2026-10-18 19:05:44 sudo chown deploy:deploy /home/deploy/.ssh/authorized_keys
+   91  2026-10-18 19:05:44 sudo chmod 600 /home/deploy/.ssh/authorized_keys
+   92  2026-10-18 19:13:55 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+   93  2026-10-18 19:14:03 sudo grep -n '^Include' /etc/ssh/sshd_config
+   94  2026-10-18 19:14:19 ls /etc/ssh/sshd_config.d/
+   95  2026-10-18 19:14:38 sudo nano /etc/ssh/sshd_config.d/00-hardening.conf
+   96  2026-10-18 19:17:55 sudo sshd -t
+   97  2026-10-18 19:18:10 sudo sshd -T | grep -Ei '^(permitrootlogin|passwordauthentication|kbdinteractiveauthentication|allowgroups|maxauthtries|pubkeyauthentication) '
+   98  2026-10-18 19:19:40 sudo systemctl reload ssh
+   99  2026-10-18 19:23:08 sudo gpasswd -d Daniel sshusers
+  100  2026-10-18 19:24:01 sudo gpasswd -a Daniel sshusers
+  101  2026-10-18 19:26:19 sudo rm /etc/ssh/sshd_config.d/00-hardening.conf
+  102  2026-10-18 19:26:19 sudo sshd -t && sudo systemctl reload ssh}
+  103  2026-10-18 19:26:26 sudo sshd -t && sudo systemctl reload ssh
+  104  2026-10-18 19:26:37 sudo rm /etc/ssh/sshd_config.d/00-hardening.conf
+  105  2026-10-18 19:26:37 sudo sshd -t && sudo systemctl reload ssh
+  106  2026-10-18 19:34:25 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+  107  2026-10-18 19:34:32 sudo grep -n '^Include' /etc/ssh/sshd_config
+  108  2026-10-18 19:34:39 ls /etc/ssh/sshd_config.d/
+  109  2026-10-18 19:34:45 sudo nano /etc/ssh/sshd_config.d/00-hardening.conf
+  110  2026-10-18 19:35:08 sudo sshd -t
+  111  2026-10-18 19:35:14 sudo sshd -T | grep -Ei '^(permitrootlogin|passwordauthentication|kbdinteractiveauthentication|allowgroups|maxauthtries|pubkeyauthentication) '
+  112  2026-10-18 19:35:23 sudo systemctl reload ssh
+  113  2026-10-18 19:37:45 history | tail -n 250
+  114  2026-10-18 19:37:45 history | grep apt
+  115  2026-10-18 19:37:45 grep -n 'ufw' ~/.bash_history
+  116  2026-10-18 19:37:45 history > ~/evidencias/historial-adminalgodon-fase3.txt
+  117  2026-10-18 20:09:49 sudo apt install -y apache2
+  118  2026-10-18 20:11:34 sudo sed -i 's/^Listen 80$/Listen 8080/' /etc/apache2/ports.conf
+  119  2026-10-18 20:11:34 grep -n '^Listen' /etc/apache2/ports.conf
+  120  2026-10-18 20:11:52 sudo nano /etc/apache2/sites-available/sitio.conf
+  121  2026-10-18 20:14:34 sudo sed -i 's/^ServerTokens .*/ServerTokens Prod/; s/^ServerSignature .*/ServerSignature Off/' /etc/apache2/conf-available/security.conf
+  122  2026-10-18 20:14:40 sudo a2enmod headers
+  123  2026-10-18 20:14:59 sudo a2dissite 000-default
+  124  2026-10-18 20:15:10 sudo a2ensite sitio
+  125  2026-10-18 20:15:19 sudo apache2ctl configtest
+  126  2026-10-18 20:15:39 sudo systemctl restart apache2
+  127  2026-10-18 20:16:31 sudo apt install -y nginx
+  128  2026-10-18 20:16:45 sudo sed -i 's/# server_tokens off;/server_tokens off;/' /etc/nginx/nginx.conf
+  129  2026-10-18 20:17:22 grep -n 'server_tokens' /etc/nginx/nginx.conf
+  130  2026-10-18 20:17:32 sudo rm /etc/nginx/sites-enabled/default
+  131  2026-10-18 20:17:48 sudo nano /etc/nginx/sites-available/sitio
+  132  2026-10-18 20:19:24 sudo ln -s /etc/nginx/sites-available/sitio /etc/nginx/sites-enabled/sitio
+  133  2026-10-18 20:19:30 sudo nginx -t
+  134  2026-10-18 20:19:38 sudo systemctl enable --now nginx
+  135  2026-10-18 20:19:46 sudo systemctl enable apache2
+  136  2026-10-18 20:19:53 sudo systemctl restart nginx
+  137  2026-10-18 20:28:30 sudo -u deploy tee /var/www/sitio/index.html > /dev/null <<'EOF'
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='utf-8'>
+  <title>Equipo Hermanos de Algodon - Parcial de Seguridad</title>
+</head>
+<body>
+  <h1>Equipo NOMBRE</h1>
+  <h2>Integrantes</h2>
+  <ul>
+    <li>Daniel Steven Ayala Rosales</li>
+    <li>Carlos Gerardo Santos Pocasangre</li>
+    <li>Samuel Francisco Amaya Sanchez</li>
+  </ul>
+  <h2>Descripción del proyecto</h2>
+  <p>Servidor Debian endurecido con SSH por clave, firewall UFW, Apache (puerto 8080) y Nginx (puerto 80), con respaldos y registros verificados.</p>
+</body>
+</html>
+EOF
+  138  2026-10-18 20:34:33 echo 'dato de prueba' | sudo -u deploy tee /var/www/sitio/respaldo.bak > /dev/null
+  139  2026-10-18 20:34:33 echo 'clave=falsa' | sudo -u deploy tee /var/www/sitio/config.ini > /dev/null
+  140  2026-10-18 20:34:33 echo 'TOKEN=falso' | sudo -u deploy tee /var/www/sitio/.env > /dev/null
+  141  2026-10-18 20:34:42 sudo -u deploy mkdir /var/www/sitio/publico
+  142  2026-10-18 20:34:50 sudo -u deploy touch /var/www/sitio/publico/archivo1 /var/www/sitio/publico/archivo2
+  143  2026-10-18 20:34:56 ls -la /var/www/sitio
+  144  2026-10-18 20:36:22 curl -s -o /dev/null -w '%{http_code}\n' http://srv-hermanosdealgodon/config.ini
+  145  2026-10-18 20:36:23 curl -s -o /dev/null -w '%{http_code}\n' http://srv-hermanosdealgodon:8080/.env
+  146  2026-10-18 20:40:14 sudo -u deploy tee /var/www/sitio/index.html > /dev/null <<'EOF'
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='utf-8'>
+  <title>Equipo Hermanos de Algodon - Parcial de Seguridad</title>
+</head>
+<body>
+  <h1>Equipo Hermanos de Algodon</h1>
+  <h2>Integrantes</h2>
+  <ul>
+    <li>Daniel Steven Ayala Rosales</li>
+    <li>Carlos Gerardo Santos Pocasangre</li>
+    <li>Sanuel Francisco Amaya Sanchez</li>
+  </ul>
+  <h2>Descripción del proyecto</h2>
+  <p>Servidor Debian endurecido con SSH por clave, firewall UFW, Apache (puerto 8080) y Nginx (puerto 80), con respaldos y registros verificados.</p>
+</body>
+</html>
+EOF
+  147  2026-10-18 21:01:58 sudo ss -tlnp | grep -E ':80 |:8080 '
+  148  2026-10-18 21:02:03 ps -o user,pid,cmd -C apache2,nginx
+  149  2026-10-18 21:10:46 ip -br a
+  150  2026-10-18 21:11:00 ping -c 2 8.8.8.8
+  151  2026-10-18 21:11:58 history | tail -n 300
+  152  2026-10-18 21:11:58 history | grep apt
+  153  2026-10-18 21:11:58 grep -n 'ufw' ~/.bash_history
+  154  2026-10-18 21:11:58 history > ~/evidencias/historial-adminalgodon-fase4.txt
+  155  2026-10-18 21:13:37 sudo ufw status verbose
+  156  2026-10-18 21:14:49 sudo ufw default deny incoming
+  157  2026-10-18 21:15:06 sudo ufw default allow outgoing
+  158  2026-10-18 21:16:53 sudo ufw allow from 192.168.64.20 to any port 22 proto tcp comment 'SSH solo cliente1'
+  159  2026-10-18 21:17:49 sudo ufw allow from 192.168.64.0/24 to any port 80 proto tcp comment 'Nginx'
+  160  2026-10-18 21:17:49 sudo ufw allow from 192.168.64.0/24 to any port 8080 proto tcp comment 'Apache'
+  161  2026-10-18 21:23:33 sudo ufw logging low
+  162  2026-10-18 21:23:42 sudo ufw enable
+  163  2026-10-18 21:23:51 sudo systemctl restart rsyslog
+  164  2026-10-18 21:25:31 sudo ufw status verbose
+  165  2026-10-18 21:51:02 sudo grep 'UFW BLOCK' /var/log/ufw.log | tail -n 5
+  166  2026-10-18 21:51:53 sudo journalctl -k --since '10 min ago' --no-pager | grep 'UFW BLOCK' | tail -n 5
+  167  2026-10-18 21:54:00 systemctl is-enabled ufw
+  168  2026-10-18 21:54:00 grep ENABLED /etc/ufw/ufw.conf
+  169  2026-10-18 21:54:00 sudo cat /etc/ufw/user.rules | grep -c ACCEPT
+  170  2026-10-18 21:56:03 history | tail -n 350
+  171  2026-10-18 21:56:03 history | grep apt
+  172  2026-10-18 21:56:03 grep -n 'ufw' ~/.bash_history
+  173  2026-10-18 21:56:03 history > ~/evidencias/historial-adminalgodon-fase5.txt
+  174  2026-10-18 22:01:50 timedatectl
+  175  2026-10-18 22:01:50 sudo timedatectl set-timezone America/El_Salvador
+  176  2026-10-18 22:02:36 systemctl is-active rsyslog
+  177  2026-10-18 22:02:36 sudo ls -l /var/log/auth.log
+  178  2026-10-18 22:15:56 sudo grep 'Accepted' /var/log/auth.log | tail -n 3
+  179  2026-10-18 22:22:48 sudo journalctl -u ssh --since '10 min ago' --no-pager | grep 'Accepted'
+  180  2026-10-18 22:31:01 sudo grep -E 'Failed|Invalid user|not allowed|refused' /var/log/auth.log | tail -n 10
+  181  2026-10-18 22:33:55 sudo tail -n 3 /var/log/apache2/sitio_access.log
+  182  2026-10-18 22:34:06 sudo tail -n 3 /var/log/nginx/sitio_access.log
+  183  2026-10-18 22:38:13 sudo grep ' 404 ' /var/log/apache2/sitio_access.log | tail -n 2
+  184  2026-10-18 22:38:22 sudo grep ' 404 ' /var/log/nginx/sitio_access.log | tail -n 2
+  185  2026-10-18 22:38:39 sudo tail -n 2 /var/log/apache2/sitio_error.log
+  186  2026-10-18 22:38:50 sudo tail -n 2 /var/log/nginx/sitio_error.log
+  187  2026-10-18 22:40:42 {   echo '== SSH exitoso =='; sudo grep 'Accepted' /var/log/auth.log | tail -n 3;   echo '== SSH fallido =='; sudo grep -E 'Failed|Invalid user|not allowed' /var/log/auth.log | tail -n 5;   echo '== Apache 200 =='; sudo grep ' 200 ' /var/log/apache2/sitio_access.log | tail -n 2;   echo '== Nginx 200 =='; sudo grep ' 200 ' /var/log/nginx/sitio_access.log | tail -n 2;   echo '== Apache 404 =='; sudo grep ' 404 ' /var/log/apache2/sitio_access.log | tail -n 2;   echo '== Nginx 404 =='; sudo grep ' 404 ' /var/log/nginx/sitio_access.log | tail -n 2; } > ~/evidencias/fase6-registros.txt
+  188  2026-10-18 22:40:42 cat ~/evidencias/fase6-registros.txt
+  189  2026-10-18 22:45:36 history | tail -n 400
+  190  2026-10-18 22:45:36 history | grep apt
+  191  2026-10-18 22:45:36 grep -n 'ufw' ~/.bash_history
+  192  2026-10-18 22:45:36 history > ~/evidencias/historial-adminalgodon-fase6.txt
+  193  2026-10-18 22:50:09 sudo install -d -m 700 -o root -g root /var/backups/parcial
+  194  2026-10-18 22:50:19 sudo ls -ld /var/backups/parcial
+  195  2026-10-18 22:54:50 sudo nano /usr/local/sbin/respaldo-parcial.sh
+  196  2026-10-18 22:56:37 sudo chown root:root /usr/local/sbin/respaldo-parcial.sh
+  197  2026-10-18 22:56:48 sudo chmod 750 /usr/local/sbin/respaldo-parcial.sh
+  198  2026-10-18 22:56:56 sudo /usr/local/sbin/respaldo-parcial.sh
+  199  2026-10-18 22:57:06 sudo ls -l /var/backups/parcial
+  200  2026-10-18 22:57:14 sudo tar -tzf $(sudo sh -c 'ls -t /var/backups/parcial/sitio_*.tar.gz | head -n 1') | head
+  201  2026-10-18 22:58:18 ls /var/backups/parcial
+  202  2026-10-18 22:58:30 sudo find /var/www -name '*.tar.gz'
+  203  2026-10-18 22:59:46 sha256sum /var/www/sitio/index.html | tee ~/evidencias/index.sha256
+  204  2026-10-18 23:00:03 sudo -u deploy rm /var/www/sitio/index.html
+  205  2026-10-18 23:00:10 curl -s -o /dev/null -w '%{http_code}\n' http://localhost/
+  206  2026-10-18 23:01:17 RESPALDO=$(sudo sh -c 'ls -t /var/backups/parcial/sitio_*.tar.gz | head -n 1')
+  207  2026-10-18 23:01:34 sudo tar --acls --xattrs -xzpf "$RESPALDO" -C / var/www/sitio/index.html
+  208  2026-10-18 23:01:34 ls -l /var/www/sitio/index.html
+  209  2026-10-18 23:01:34 sha256sum -c ~/evidencias/index.sha256
+  210  2026-10-18 23:01:34 curl -s -o /dev/null -w '%{http_code}\n' http://localhost/
+  211  2026-10-18 23:01:34 • 
+  212  2026-10-18 23:04:28 history | tail -n 500
+  213  2026-10-18 23:04:28 history | grep apt
+  214  2026-10-18 23:04:28 grep -n 'ufw' ~/.bash_history
+  215  2026-10-18 23:04:28 history > ~/evidencias/historial-adminalgodon-fase7.txt

@@ -1,0 +1,133 @@
+    1  2026-10-18 15:52:08 cat >> ~/.bashrc <<'EOF'
+export HISTTIMEFORMAT='%F %T '
+export HISTSIZE=10000
+shopt -s histappend
+PROMPT_COMMAND='history -a'
+EOF
+    2  2026-10-18 15:52:08 source ~/.bashrc
+    3  2026-10-18 15:52:08 mkdir -p ~/evidencias
+    4  2026-10-18 15:59:26 ip -br a
+    5  2026-10-18 16:00:14 nmcli device status
+    6  2026-10-18 16:00:14 sudo nmcli connection add type ethernet ifname enp0s8 con-name red-local ipv4.method manual ipv4.addresses 192.168.64.20/24
+    7  2026-10-18 16:00:24 sudo nmcli connection up red-local
+    8  2026-10-18 16:00:58 nmcli device status
+    9  2026-10-18 16:00:58 sudo nmcli connection add type ethernet ifname enp0s8 con-name red-local ipv4.method manual ipv4.addresses 192.168.64.20/24
+   10  2026-10-18 16:00:58 sudo nmcli connection up red-local
+   11  2026-10-18 16:02:29 ip -br a
+   12  2026-10-18 16:04:01 ping -c 3 192.168.64.10
+   13  2026-10-18 16:10:54 echo '192.168.64.10 srv-hermanosdealgodon' | sudo tee -a /etc/hosts
+   14  2026-10-18 16:34:41 ping -c 2 deb.debian.org
+   15  2026-10-18 16:34:49 grep -rn cdrom /etc/apt/sources.list /etc/apt/sources.list.d/
+   16  2026-10-18 16:35:30 sudo sed -i '/^deb cdrom:/s/^/# /' /etc/apt/sources.list
+   17  2026-10-18 16:35:42 [ -f /etc/apt/sources.list.d/debian.sources ] && sudo mv /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sources.bak
+   18  2026-10-18 16:36:05 sudo tee /etc/apt/sources.list.d/debian.sources > /dev/null <<'EOF'
+Types: deb
+URIs: http://deb.debian.org/debian
+Suites: trixie trixie-updates
+Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+Types: deb
+URIs: http://security.debian.org/debian-security
+Suites: trixie-security
+Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+EOF
+   19  2026-10-18 16:36:33 sudo apt update
+   20  2026-10-18 16:37:21 sudo apt full-upgrade -y
+   21  2026-10-18 16:43:15 apt list --upgradable
+   22  2026-10-18 16:43:54 sudo apt install -y openssh-server ufw rsyslog acl curl
+   23  2026-10-18 16:44:09 • 
+   24  2026-10-18 16:44:44 sudo reboot
+   25  2026-10-18 16:47:56 sudo apt update
+   26  2026-10-18 16:53:19 sudo apt install -y openssh-client curl nmap lynx
+   27  2026-10-18 18:39:56 history | tail -n 150
+   28  2026-10-18 18:39:56 history | grep apt
+   29  2026-10-18 18:39:56 grep -n 'ufw' ~/.bash_history
+   30  2026-10-18 18:39:56 history > ~/evidencias/historial-adminalgodon.txt
+   31  2026-10-18 18:41:57 ssh-keygen -t ed25519 -f ~/.ssh/id_admin -C 'Admin@cliente1'
+   32  2026-10-18 18:43:07 ssh-keygen -t ed25519 -f ~/.ssh/id_charlie -C 'Charlie@cliente1'
+   33  2026-10-18 18:44:01 ssh-keygen -t ed25519 -f ~/.ssh/id_daniel -C 'Daniel@cliente1'
+   34  2026-10-18 18:44:22 ssh-keygen -t ed25519 -f ~/.ssh/id_deploy -C 'deploy@cliente1'
+   35  2026-10-18 18:45:47 ssh-copy-id -i ~/.ssh/id_admin.pub Admin@srv-hermanosdealgodon
+   36  2026-10-18 18:53:44 ssh-copy-id -i ~/.ssh/id_charlie.pub Charlie@srv-hermanosdealgodon
+   37  2026-10-18 18:54:10 ssh-copy-id -i ~/.ssh/id_daniel.pub Daniel@srv-hermanosdealgodon
+   38  2026-10-18 18:54:38 cat ~/.ssh/id_deploy.pub
+   39  2026-10-18 18:59:40 ssh -i ~/.ssh/id_admin Admin@srv-hermanosdealgodon 'hostname; whoami'
+   40  2026-10-18 18:59:56 ssh -i ~/.ssh/id_charlie Charlie@srv-hermanosdealgodon 'hostname; whoami'
+   41  2026-10-18 19:00:06 ssh -i ~/.ssh/id_daniel Daniel@srv-hermanosdealgodon 'hostname; whoami'
+   42  2026-10-18 19:00:13 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname; whoami'
+   43  2026-10-18 19:02:57 ssh -v -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname; whoami'
+   44  2026-10-18 19:06:13 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname; whoami'
+   45  2026-10-18 19:12:16 ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password admin@srv-hermanosdealgodon
+   46  2026-10-18 19:20:34 ssh root@srv-hermanosdealgodon
+   47  2026-10-18 19:21:13 ssh -o PubkeyAuthentication=no admin@srv-hermanosdealgodon
+   48  2026-10-18 19:22:22 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname; whoami'
+   49  2026-10-18 19:23:38 ssh daniel@srv-hermanosdealgodon
+   50  2026-10-18 19:39:06 history | tail -n 200
+   51  2026-10-18 19:39:06 history | grep apt
+   52  2026-10-18 19:39:06 grep -n 'ufw' ~/.bash_history
+   53  2026-10-18 19:39:06 history > ~/evidencias/historial-adminalgodon-fase3.txt
+   54  2026-10-18 20:37:20 curl -i http://srv-hermanosdealgodon/
+   55  2026-10-18 20:41:18 curl -i http://srv-NOMBRE:8080/
+   56  2026-10-18 20:41:31 curl -i http://srv-hermanosdealgodon:8080/
+   57  2026-10-18 20:42:32 curl -sI http://srv-hermanosdealgodon/ | grep -i '^server'
+   58  2026-10-18 20:42:53 curl -sI http://srv-hermanosdealgodon:8080/ | grep -i '^server'
+   59  2026-10-18 20:43:32 for p in 80 8080; do   for r in respaldo.bak config.ini .env publico/ ruta-inexistente; do     echo -n "$p /$r -> "; curl -s -o /dev/null -w '%{http_code}\n' http://srv-NOMBRE:$p/$r;   done; done
+   60  2026-10-18 20:45:58 for p in 80 8080; do   for r in respaldo.bak config.ini .env publico/ ruta-inexistente; do     echo -n "$p /$r -> "; curl -s -o /dev/null -w '%{http_code}\n' http://srv-hermanosdealgodon:$p/$r;   done; done
+   61  2026-10-18 21:04:58 [200~history | tail -n 30
+   62  2026-10-18 21:04:58 history | grep apt
+   63  2026-10-18 21:04:58 grep -n 'ufw' ~/.bash_history
+   64  2026-10-18 21:06:05 history | tail -n 250
+   65  2026-10-18 21:06:05 history | grep apt
+   66  2026-10-18 21:06:05 grep -n 'ufw' ~/.bash_history
+   67  2026-10-18 21:06:05 history > ~/evidencias/historial-adminalgodon-fase4.txt
+   68  2026-10-18 21:36:22 ssh -i ~/.ssh/id_deploy deploy@srv-NOMBRE 'hostname; whoami'
+   69  2026-10-18 21:36:22 curl -sI http://srv-NOMBRE:8080/ | head -n 1
+   70  2026-10-18 21:37:01 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname; whoami'
+   71  2026-10-18 21:38:33 curl -sI http://srv-hermanosdealgodon:8080/ | head -n 1
+   72  2026-10-18 21:39:30 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname; whoami'
+   73  2026-10-18 21:42:29 cd /tmp && python3 -m http.server 9999 --bind 192.168.56.10
+   74  2026-10-18 21:45:30 curl --max-time 5 http://srv-NOMBRE:9999/
+   75  2026-10-18 21:45:43 curl --max-time 5 http://srv-hermanosdealgodon:9999/
+   76  2026-10-18 21:45:54 cd
+   77  2026-10-18 21:49:29 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname; whoami'
+   78  2026-10-18 21:50:03 curl -sI http://srv-hermanosdealgodon:8080/ | head -n 1
+   79  2026-10-18 21:57:40 history | tail -n 300
+   80  2026-10-18 21:57:40 history | grep apt
+   81  2026-10-18 21:57:40 grep -n 'ufw' ~/.bash_history
+   82  2026-10-18 21:57:40 history > ~/evidencias/historial-adminalgodon-fase5.txt
+   83  2026-10-18 22:01:59 timedatectl
+   84  2026-10-18 22:01:59 sudo timedatectl set-timezone America/El_Salvador
+   85  2026-10-18 22:14:25 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'echo sesion de prueba'
+   86  2026-10-18 22:30:29 ssh falso@srv-hermanosdealgodon
+   87  2026-10-18 22:30:44 ssh -i ~/.ssh/id_deploy root@srv-hemanosdealgodon
+   88  2026-10-18 22:33:26 curl -s -o /dev/null http://srv-hermanosdealgodon:8080/
+   89  2026-10-18 22:33:46 curl -s -o /dev/null http://srv-hermanosdealgodon/
+   90  2026-10-18 22:36:32 curl -s -o /dev/null -w '%{http_code}\n' http://srv-hermanosdealgodon:8080/no-existe
+   91  2026-10-18 22:37:06 curl -s -o /dev/null -w '%{http_code}\n' http://srv-hermanosdealgodon/no-existe
+   92  2026-10-18 22:46:55 history | tail -n 300
+   93  2026-10-18 22:46:56 history | grep apt
+   94  2026-10-18 22:46:56 grep -n 'ufw' ~/.bash_history
+   95  2026-10-18 22:46:56 history > ~/evidencias/historial-adminalgodon-fase6.txt
+   96  2026-10-18 23:20:36 curl -sI http://srv-hermanosdealgodon/ | head -n 1
+   97  2026-10-18 23:20:36 curl -sI http://srv-hermanosdealgodon:8080/ | head -n 1
+   98  2026-10-18 23:20:36 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname'
+   99  2026-10-18 23:20:59 ssh root@srv-hermanosdealgodon
+  100  2026-10-18 23:21:18 curl -sI http://srv-hermanosdealgodon/ | head -n 1
+  101  2026-10-18 23:21:18 curl -sI http://srv-hermanosdealgodon:8080/ | head -n 1
+  102  2026-10-18 23:21:18 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname'
+  103  2026-10-18 23:21:29 ssh root@srv-hermanosdealgodon
+  104  2026-10-18 23:21:46 curl -sI http://srv-hermanosdealgodon/ | head -n 1
+  105  2026-10-18 23:21:46 curl -sI http://srv-hermanosdealgodon:8080/ | head -n 1
+  106  2026-10-18 23:21:46 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname'
+  107  2026-10-18 23:21:47 ssh root@srv-hermanosdealgodon
+  108  2026-10-18 23:22:11 curl -sI http://srv-hermanosdealgodon/ | head -n 1
+  109  2026-10-18 23:22:11 curl -sI http://srv-hermanosdealgodon:8080/ | head -n 1
+  110  2026-10-18 23:22:11 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname'
+  111  2026-10-18 23:22:11 ssh root@srv-hermanosdealgodon
+  112  2026-10-18 23:23:04 ssh -i ~/.ssh/id_deploy deploy@srv-hermanosdealgodon 'hostname'
+  113  2026-10-18 23:23:10 ssh root@srv-hermanosdealgodon
+  114  2026-10-18 23:35:03 history | tail -n 700
+  115  2026-10-18 23:35:03 history | grep apt
+  116  2026-10-18 23:35:03 grep -n 'ufw' ~/.bash_history
+  117  2026-10-18 23:35:03 history > ~/evidencias/historial-adminalgodon-fasefinal.txt

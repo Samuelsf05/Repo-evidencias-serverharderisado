@@ -1,0 +1,22 @@
+== SSH exitoso ==
+2026-10-18T22:14:22.898895-06:00 srv-hermanosdealgodon sshd-session[4446]: Accepted publickey for deploy from 192.168.64.20 port 40418 ssh2: ED25519 SHA256:vzCBwGnMrcBUJhMvdMJMJZ6AUQk4LGcug5tuwV846G0
+2026-10-18T22:15:56.406112-06:00 srv-hermanosdealgodon sudo: adminalgodon : TTY=pts/0 ; PWD=/home/adminalgodon ; USER=root ; COMMAND=/usr/bin/grep Accepted /var/log/auth.log
+2026-10-18T22:40:42.840426-06:00 srv-hermanosdealgodon sudo: adminalgodon : TTY=pts/0 ; PWD=/home/adminalgodon ; USER=root ; COMMAND=/usr/bin/grep Accepted /var/log/auth.log
+== SSH fallido ==
+2026-10-18T19:21:13.672102-06:00 srv-hermanosdealgodon sshd-session[8598]: Invalid user admin from 192.168.64.20 port 59328
+2026-10-18T19:23:39.031429-06:00 srv-hermanosdealgodon sshd-session[8750]: Invalid user daniel from 192.168.64.20 port 58274
+2026-10-18T22:30:26.551307-06:00 srv-hermanosdealgodon sshd-session[4599]: Invalid user falso from 192.168.64.20 port 33822
+2026-10-18T22:31:01.118781-06:00 srv-hermanosdealgodon sudo: adminalgodon : TTY=pts/0 ; PWD=/home/adminalgodon ; USER=root ; COMMAND=/usr/bin/grep -E 'Failed|Invalid user|not allowed|refused' /var/log/auth.log
+2026-10-18T22:40:42.865161-06:00 srv-hermanosdealgodon sudo: adminalgodon : TTY=pts/0 ; PWD=/home/adminalgodon ; USER=root ; COMMAND=/usr/bin/grep -E 'Failed|Invalid user|not allowed' /var/log/auth.log
+== Apache 200 ==
+192.168.64.20 - - [18/Oct/2026:21:50:01 -0600] "HEAD / HTTP/1.1" 200 298 "-" "curl/8.14.1"
+192.168.64.20 - - [18/Oct/2026:22:33:23 -0600] "GET / HTTP/1.1" 200 855 "-" "curl/8.14.1"
+== Nginx 200 ==
+192.168.64.6 - - [18/Oct/2026:21:29:04 -0600] "GET / HTTP/1.1" 200 385 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0"
+192.168.64.20 - - [18/Oct/2026:22:33:42 -0600] "GET / HTTP/1.1" 200 557 "-" "curl/8.14.1"
+== Apache 404 ==
+192.168.64.6 - - [18/Oct/2026:21:31:01 -0600] "GET /noexiste HTTP/1.1" 404 499 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0"
+192.168.64.20 - - [18/Oct/2026:22:36:29 -0600] "GET /no-existe HTTP/1.1" 404 443 "-" "curl/8.14.1"
+== Nginx 404 ==
+192.168.64.6 - - [18/Oct/2026:21:30:05 -0600] "GET /noexiste HTTP/1.1" 404 118 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0"
+192.168.64.20 - - [18/Oct/2026:22:37:02 -0600] "GET /no-existe HTTP/1.1" 404 146 "-" "curl/8.14.1"

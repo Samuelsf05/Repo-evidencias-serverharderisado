@@ -1,0 +1,74 @@
+    1  2026-10-18 15:43:32 cat >> ~/.bashrc <<'EOF'
+    2  2026-10-18 15:48:21 source ~/.bashrc
+    3  2026-10-18 15:48:21 mkdir -p ~/evidencias
+    4  2026-10-18 15:48:37 cat >> ~/.bashrc <<'EOF'
+    5  2026-10-18 15:49:18 export HISTTIMEFORMAT='%F %T '
+    6  2026-10-18 15:49:26 source ~/.bashrc
+    7  2026-10-18 15:51:35 cat /etc/os-release
+    8  2026-10-18 15:51:35 uname -r
+    9  2026-10-18 15:51:35 sudo -v
+   10  2026-10-18 15:54:31 su -
+   11  2026-10-18 16:46:38 sudo apt update
+   12  2026-10-18 16:57:37 sudo apt install -y openssh-client curl nmap lynx
+   13  2026-10-18 16:59:22 systemctl list-units --type=service --state=running | tee ~/evidencias/servicios-antes.txt
+   14  2026-10-18 16:59:22 systemctl list-unit-files --type=service --state=enabled
+   15  2026-10-18 17:00:27 sudo ss -tulpn | tee ~/evidencias/puertos-antes.txt
+   16  2026-10-18 17:09:33 for u in cups.service cups.socket cups.path cups-browsed.service avahi-daemon.service avahi-daemon.socket bluetooth.service ModemManager.service; do   sudo systemctl disable --now "$u" 2>/dev/null && echo "deshabilitado: $u" || echo "no existe o ya estaba inactivo: $u"; done
+   17  2026-10-18 17:10:56 sudo ss -tulpn | tee ~/evidencias/puertos-despues.txt
+   18  2026-10-18 17:12:04 systemctl list-unit-files --type=service --state=enabled
+   19  2026-10-18 17:13:05 sudo adduser Admin
+   20  2026-10-18 17:14:25 sudo adduser Charlie
+   21  2026-10-18 17:16:50 sudo adduser Daniel
+   22  2026-10-18 17:18:40 sudo groupadd webadmin
+   23  2026-10-18 17:19:08 sudo groupadd sshusers
+   24  2026-10-18 17:21:54 for u in Admin Charlie Daniel; do sudo usermod -aG webadmin,sshusers "$u"; done
+   25  2026-10-18 17:22:18 sudo adduser --disabled-password --gecos '' deploy
+   26  2026-10-18 17:23:58 sudo usermod -aG webadmin,sshusers deploy
+   27  2026-10-18 17:24:20 id deploy
+   28  2026-10-18 17:24:20 getent passwd deploy
+   29  2026-10-18 17:26:07 sudo usermod -aG sudo Admin
+   30  2026-10-18 17:26:44 sudo usermod -aG sudo Charlie
+   31  2026-10-18 17:26:53 getent group sudo
+   32  2026-10-18 17:27:07 sudo usermod -aG sudo alumno1
+   33  2026-10-18 17:27:07 sudo usermod -aG sudo alumno2
+   34  2026-10-18 17:27:08 getent group sudo
+   35  2026-10-18 17:27:08 id alumno3
+   36  2026-10-18 17:27:08 sudo -l -U www-data
+   37  2026-10-18 17:28:01 sudo gpasswd -d alumno1 sudo
+   38  2026-10-18 17:28:01 sudo gpasswd -d alumno2 sudo
+   39  2026-10-18 17:28:01 getent group sudo
+   40  2026-10-18 17:28:42 sudo usermod -aG sudo Admin
+   41  2026-10-18 17:28:43 sudo usermod -aG sudo Charlie
+   42  2026-10-18 17:28:43 getent group sudo
+   43  2026-10-18 17:28:43 id Daniel
+   44  2026-10-18 17:28:43 sudo -l -U www-data
+   45  2026-10-18 17:28:43 • 
+   46  2026-10-18 17:33:35 history | tail -n 30
+   47  2026-10-18 17:33:35 history | grep apt
+   48  2026-10-18 17:33:35 grep -n 'ufw' ~/.bash_history
+   49  2026-10-18 17:33:35 history > ~/evidencias/historial-adminalgodon.txt
+   50  2026-10-18 17:36:06 sudo mkdir -p /var/www/sitio/uploads
+   51  2026-10-18 17:36:06 sudo chown -R deploy:webadmin /var/www/sitio
+   52  2026-10-18 17:36:06 sudo find /var/www/sitio -type d -exec chmod 2775 {} +
+   53  2026-10-18 17:36:06 sudo find /var/www/sitio -type f -exec chmod 664 {} +
+   54  2026-10-18 17:36:06 sudo chown www-data:webadmin /var/www/sitio/uploads
+   55  2026-10-18 17:36:06 sudo chmod 2770 /var/www/sitio/uploads
+   56  2026-10-18 17:36:06 sudo setfacl -R -m g:webadmin:rwX /var/www/sitio
+   57  2026-10-18 17:36:06 sudo setfacl -R -d -m g:webadmin:rwX /var/www/sitio
+   58  2026-10-18 17:36:06 ls -ld /var/www/sitio /var/www/sitio/uploads
+   59  2026-10-18 17:36:06 getfacl /var/www/sitio
+   60  2026-10-18 17:37:08 sudo find /var/www -perm -o+w
+   61  2026-10-18 17:44:36 sudo -u deploy touch /var/www/sitio/permitido.txt
+   62  2026-10-18 17:44:36 sudo -u www-data touch /var/www/sitio/uploads/permitido-servicio.txt
+   63  2026-10-18 17:44:36 sudo -u www-data touch /var/www/sitio/rechazado.txt
+   64  2026-10-18 17:45:06 sudo -u deploy touch /var/www/sitio/permitido.txt
+   65  2026-10-18 17:45:06 sudo -u www-data touch /var/www/sitio/uploads/permitido-servicio.txt
+   66  2026-10-18 17:45:17 [200~sudo -u www-data touch /var/www/sitio/rechazado.txt
+   67  2026-10-18 17:45:19 sudo -u nobody touch /var/www/sitio/rechazado2.txt~
+   68  2026-10-18 17:45:30 ls -l /var/www/sitio /var/www/sitio/uploads
+   69  2026-10-18 17:45:39 sudo rm /var/www/sitio/permitido.txt /var/www/sitio/uploads/permitido-servicio.txt
+   70  2026-10-18 17:46:30 su - Daniel
+   71  2026-10-18 17:54:57 history | tail -n 150
+   72  2026-10-18 17:54:57 history | grep apt
+   73  2026-10-18 17:54:57 grep -n 'ufw' ~/.bash_history
+   74  2026-10-18 17:54:57 history > ~/evidencias/historial-adminalgodon-fase2.txt
